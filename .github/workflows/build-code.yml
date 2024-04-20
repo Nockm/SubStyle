@@ -1,0 +1,40 @@
+name: Build Code
+on:
+  # From push
+  push:
+    branches-ignore:
+      - 'nobuild**' # For escaping automated builds, e.g. when we don't want to use up build time quota
+  # From manual run from Github Actions page
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration:
+          - Debug
+          - Release
+    steps:
+    - id: vars
+      name: Set build variables
+      run: |
+        $shortsha="${{ github.sha }}".Substring(0,9)
+        $timestamp=(Get-Date).ToUniversalTime().ToString('yyyyMMdd-HHmmss')
+        echo "configuration=${{ matrix.configuration }}" >> $env:GITHUB_OUTPUT
+        echo "sha=${{ github.sha }}" >> $env:GITHUB_OUTPUT
+        echo "run-number=${{ github.run_number }}" >> $env:GITHUB_OUTPUT
+        echo "shortsha=$shortsha" >> $env:GITHUB_OUTPUT
+        echo "timestamp=$timestamp" >> $env:GITHUB_OUTPUT
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+    - name: Run builder
+      run: >
+        .\\build\\build.ps1
+        -Configuration "${{ steps.vars.outputs.configuration }}"
+        -GitSha "${{ steps.vars.outputs.sha }}"
+        -RunNumber "${{ steps.vars.outputs.run-number }}"
+        -Timestamp "${{ steps.vars.outputs.timestamp }}"
