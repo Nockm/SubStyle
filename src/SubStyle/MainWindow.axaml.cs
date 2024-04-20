@@ -1,11 +1,11 @@
-using Avalonia.Controls;
-
 namespace SubStyle;
+
+using Avalonia.Controls;
 
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        InitializeComponent();
+        this.InitializeComponent();
     }
 }

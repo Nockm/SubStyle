@@ -1,22 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <!--
-    <SelfContained>True</SelfContained>
-    <PublishTrimmed>true</PublishTrimmed>
-    <PublishAot>true</PublishAot>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    -->
-    <!--
-    <PublishSingleFile>true</PublishSingleFile>
-    -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +13,11 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10" />
+    <PackageReference Include="ReactiveUI" Version="19.6.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SubStyle.Views\SubStyle.Views.csproj" />
+    <ProjectReference Include="..\SubStyle.Models\SubStyle.Models.csproj" />
   </ItemGroup>
+
 </Project>

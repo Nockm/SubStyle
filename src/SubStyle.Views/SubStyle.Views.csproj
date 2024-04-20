@@ -1,22 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <!--
-    <SelfContained>True</SelfContained>
-    <PublishTrimmed>true</PublishTrimmed>
-    <PublishAot>true</PublishAot>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    -->
-    <!--
-    <PublishSingleFile>true</PublishSingleFile>
-    -->
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SubStyle.Views\SubStyle.Views.csproj" />
+    <ProjectReference Include="..\SubStyle.Models\SubStyle.Models.csproj" />
+    <ProjectReference Include="..\SubStyle.Services\SubStyle.Services.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PackView.axaml.cs">
+      <DependentUpon>PackView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="WorkspaceView.axaml.cs">
+      <DependentUpon>WorkspaceView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
