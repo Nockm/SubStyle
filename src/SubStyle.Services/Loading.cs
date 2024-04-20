@@ -37,6 +37,8 @@ public static class Loading
             RootPack = rootPack,
         };
 
+        workspace.Zones.AddRange(paths.ListZones());
+
         return workspace;
     }
 }
