@@ -16,4 +16,8 @@
     <PackageReference Include="ReactiveUI" Version="19.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SubStyle.Sys\SubStyle.Sys.csproj" />
+  </ItemGroup>
+
 </Project>

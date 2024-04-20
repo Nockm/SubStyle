@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubStyle.Sys", "SubStyle.Sys\SubStyle.Sys.csproj", "{5FA3689D-839D-44F5-9745-100D3F893F8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{4C7D4DBA-7A47-43C4-90B6-EDE85911DC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C7D4DBA-7A47-43C4-90B6-EDE85911DC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C7D4DBA-7A47-43C4-90B6-EDE85911DC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA3689D-839D-44F5-9745-100D3F893F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA3689D-839D-44F5-9745-100D3F893F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA3689D-839D-44F5-9745-100D3F893F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA3689D-839D-44F5-9745-100D3F893F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
