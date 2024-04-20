@@ -2,20 +2,13 @@
 
 using System.Collections.ObjectModel;
 using ReactiveUI;
+using SubStyle.Models.Utils;
 
 public class Pack : ReactiveObject
 {
     public string Name { get; set; } = "unset";
 
     public ObservableCollection<Asset> Assets { get; } = new ObservableCollection<Asset>();
-
-    public Pack SetAssets(IList<Asset> assets)
-    {
-        this.Assets.Clear();
-        assets.ToList().ForEach(this.Assets.Add);
-
-        return this;
-    }
 
     public void CopyFrom(Pack? pack)
     {
@@ -24,6 +17,6 @@ public class Pack : ReactiveObject
             return;
         }
 
-        this.SetAssets(pack.Assets);
+        this.Assets.SetRange(pack.Assets);
     }
 }

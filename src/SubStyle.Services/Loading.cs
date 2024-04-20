@@ -1,6 +1,7 @@
 ﻿namespace SubStyle.Services;
 
 using SubStyle.Models;
+using SubStyle.Models.Utils;
 
 public static class Loading
 {
@@ -20,7 +21,9 @@ public static class Loading
         Pack pack = new Pack()
         {
             Name = directory,
-        }.SetAssets(assets);
+        };
+
+        pack.Assets.SetRange(assets);
 
         return pack;
     }
