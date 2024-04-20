@@ -12,6 +12,8 @@ public class Asset : ReactiveObject
 
     public string? Filename { get; set; } = "unset";
 
+    public string Description { get; set; } = "unset";
+
     public static Asset PathToAsset(string path)
     {
         return new Asset().InitFromPath(path);
@@ -21,6 +23,7 @@ public class Asset : ReactiveObject
     {
         string assetPath = Path.GetFileNameWithoutExtension(path);
 
+        this.Description = Convert.AssessBitmap(path);
         this.Bitmap = Convert.PathToBitmap(path);
         this.Filename = Path.GetFileNameWithoutExtension(path);
         this.AssetPart = Convert.StringToEnum<AssetParts>(assetPath);

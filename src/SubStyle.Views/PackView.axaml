@@ -9,7 +9,7 @@
     xmlns:services="using:SubStyle.Services"
     xmlns:views="using:SubStyle.Views"
     Margin="16"
-    d:DesignHeight="450"
+    d:DesignHeight="1600"
     d:DesignWidth="800"
     x:DataType="models:Pack"
     mc:Ignorable="d"

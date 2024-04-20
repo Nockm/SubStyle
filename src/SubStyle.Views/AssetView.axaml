@@ -7,22 +7,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:SubStyle.Models"
     xmlns:services="using:SubStyle.Services"
-    Margin="16"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Margin="0,0,0,0"
+    d:DesignHeight="200"
+    d:DesignWidth="400"
     x:DataType="models:Asset"
     mc:Ignorable="d"
     >
     <Design.DataContext>
         <dtds:AssetDtd />
     </Design.DataContext>
-    <StackPanel>
-        <TextBlock Text="{Binding Filename}" />
+    <StackPanel Orientation="Horizontal">
         <Image
-            Width="30"
-            Height="30"
             HorizontalAlignment="Left"
+            VerticalAlignment="Center"
             Source="{Binding Bitmap}"
+            />
+        <TextBlock
+            Width="80"
+            VerticalAlignment="Center"
+            Text="{Binding Filename}"
+            />
+        <TextBlock
+            VerticalAlignment="Center"
+            FontFamily="Courier New"
+            Text="{Binding Description}"
             />
     </StackPanel>
 </UserControl>
