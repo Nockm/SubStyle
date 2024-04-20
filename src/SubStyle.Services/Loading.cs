@@ -30,14 +30,16 @@ public static class Loading
 
     public static Workspace LoadWorkspaceFromPaths(Paths paths)
     {
-        Pack rootPack = LoadPackFromDirectory(paths.DefaultGraphicsDir);
+        Pack rootGraphics = LoadPackFromDirectory(paths.RootGraphicsDir);
 
         Workspace workspace = new Workspace()
         {
-            RootPack = rootPack,
+            RootGraphics = rootGraphics,
         };
 
-        workspace.Zones.AddRange(paths.ListZones());
+        workspace.Mods.AddRange(paths.ListMods());
+
+        workspace.Targets.AddRange(paths.ListZones());
 
         return workspace;
     }

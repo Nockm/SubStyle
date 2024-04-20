@@ -19,6 +19,6 @@
     </Design.DataContext>
     <StackPanel>
         <TextBlock Text="Workspace" />
-        <views:PackView DataContext="{Binding RootPack}" />
+        <views:PackView DataContext="{Binding RootGraphics}" />
     </StackPanel>
 </UserControl>

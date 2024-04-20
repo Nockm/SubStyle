@@ -11,7 +11,9 @@ public class Paths
 
         this.DataDir = @"C:\Users\justin\AppData\Local\VirtualStore\Program Files (x86)\Continuum";
 
-        this.DefaultGraphicsDir = Path.Join(this.InstallDir, "graphics");
+        this.ModsDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SubStyle", "mods");
+
+        this.RootGraphicsDir = Path.Join(this.InstallDir, "graphics");
 
         this.ZonesDir = Path.Join(this.DataDir, "zones");
     }
@@ -20,13 +22,23 @@ public class Paths
 
     public string DataDir { get; set; }
 
-    public string DefaultGraphicsDir { get; set; }
+    public string RootGraphicsDir { get; set; }
 
     public string ZonesDir { get; set; }
+
+    public string ModsDir { get; set; }
 
     public string GetZoneDir(string zone)
     {
         return Path.Combine(this.ZonesDir, zone);
+    }
+
+    public string[] ListMods()
+    {
+        return Directory.GetFiles(this.ModsDir)
+            .ToList()
+            .Select(x => new DirectoryInfo(x).Name)
+            .ToArray();
     }
 
     public string[] ListZones()

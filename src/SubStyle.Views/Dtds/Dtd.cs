@@ -7,7 +7,7 @@ public static class Dtd
 {
     public static Workspace Workspace { get; } = Loading.LoadWorkspace();
 
-    public static Pack? Pack { get; } = Workspace.RootPack;
+    public static Pack? Pack { get; } = Workspace.RootGraphics;
 
     public static Asset? Asset { get; } = Pack?.Assets.FirstOrDefault();
 }
