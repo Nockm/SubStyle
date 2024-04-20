@@ -6,13 +6,37 @@ using SubStyle.Models.Utils;
 
 public class Asset : ReactiveObject
 {
-    public Bitmap? Bitmap { get; set; }
+    private Bitmap? bitmap;
 
-    public AssetParts? AssetPart { get; set; }
+    private AssetParts? assetPart;
 
-    public string? Filename { get; set; } = "unset";
+    private string filename = "filename unset";
 
-    public string Description { get; set; } = "unset";
+    private string description = "description unset";
+
+    public Bitmap? Bitmap
+    {
+        get => this.bitmap;
+        set => this.RaiseAndSetIfChanged(ref this.bitmap, value);
+    }
+
+    public AssetParts? AssetPart
+    {
+        get => this.assetPart;
+        set => this.RaiseAndSetIfChanged(ref this.assetPart, value);
+    }
+
+    public string Filename
+    {
+        get => this.filename;
+        set => this.RaiseAndSetIfChanged(ref this.filename, value);
+    }
+
+    public string Description
+    {
+        get => this.description;
+        set => this.RaiseAndSetIfChanged(ref this.description, value);
+    }
 
     public static Asset PathToAsset(string path)
     {

@@ -6,7 +6,21 @@ using SubStyle.Models.Utils;
 
 public class Pack : ReactiveObject
 {
-    public string Name { get; set; } = "unset";
+    private string name = "name unset";
+
+    private string notes = "notes unset";
+
+    public string Name
+    {
+        get => this.name;
+        set => this.RaiseAndSetIfChanged(ref this.name, value);
+    }
+
+    public string Notes
+    {
+        get => this.notes;
+        set => this.RaiseAndSetIfChanged(ref this.notes, value);
+    }
 
     public ObservableCollection<Asset> Assets { get; } = new ObservableCollection<Asset>();
 

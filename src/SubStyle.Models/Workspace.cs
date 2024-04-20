@@ -5,45 +5,63 @@ using ReactiveUI;
 
 public class Workspace : ReactiveObject
 {
-    /// <summary>
-    /// Gets or sets the name of the selected mod.
-    /// </summary>
-    public string? SelectedMod { get; set; }
+    private string? selectedMod;
+    private ObservableCollection<string> mods = new ObservableCollection<string>();
+    private Pack? selectedModGraphics;
+    private string? selectedTarget;
+    private ObservableCollection<string> targets = new ObservableCollection<string>();
+    private Pack? selectedTargetGraphics;
+    private Pack? rootGraphics;
+    private Pack? previewGraphics;
 
-    /// <summary>
-    /// Gets the available mods.
-    /// </summary>
-    public ObservableCollection<string> Mods { get; } = new ObservableCollection<string>();
+    public string? SelectedMod
+    {
+        get => this.selectedMod;
+        set => this.RaiseAndSetIfChanged(ref this.selectedMod, value);
+    }
 
-    /// <summary>
-    /// Gets or sets the graphics in the selected mod.
-    /// </summary>
-    public Pack? SelectedModGraphics { get; set; }
+    public ObservableCollection<string> Mods
+    {
+        get => this.mods;
+    }
 
-    /// <summary>
-    /// Gets or sets the name of the selected target.
-    /// </summary>
-    public string? SelectedTarget { get; set; }
+    public Pack? SelectedModGraphics
+    {
+        get => this.selectedModGraphics;
+        set => this.RaiseAndSetIfChanged(ref this.selectedModGraphics, value);
+    }
 
-    /// <summary>
-    /// Gets the available targets.
-    /// </summary>
-    public ObservableCollection<string> Targets { get; } = new ObservableCollection<string>();
+    public string? SelectedTarget
+    {
+        get => this.selectedTarget;
+        set => this.RaiseAndSetIfChanged(ref this.selectedTarget, value);
+    }
 
-    /// <summary>
-    /// Gets or sets the graphics currently at the selected target.
-    /// </summary>
-    public Pack? SelectedTargetGraphics { get; set; }
+    public ObservableCollection<string> Targets
+    {
+        get => this.targets;
+    }
 
-    /// <summary>
-    /// Gets or sets the graphics currently at the root graphics directory.
-    /// </summary>
-    public Pack? RootGraphics { get; set; }
+    public Pack? SelectedTargetGraphics
+    {
+        get => this.selectedTargetGraphics;
+        set => this.RaiseAndSetIfChanged(ref this.selectedTargetGraphics, value);
+    }
+
+    public Pack? RootGraphics
+    {
+        get => this.rootGraphics;
+        set => this.RaiseAndSetIfChanged(ref this.rootGraphics, value);
+    }
 
     /// <summary>
     /// Gets or sets the graphics that would result from overlaying RootGraphics -> SelectedTargetGraphics -> SelectedModGraphics.
     /// </summary>
-    public Pack? PreviewGraphics { get; set; }
+    public Pack? PreviewGraphics
+    {
+        get => this.previewGraphics;
+        set => this.RaiseAndSetIfChanged(ref this.previewGraphics, value);
+    }
 
     public void CopyFrom(Workspace? workspace)
     {
