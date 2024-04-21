@@ -4,7 +4,11 @@ public class BitmapInfo
 {
     public BitmapInfo(Stream stream)
     {
-        ByteReader byteReader = new ByteReader(stream);
+        MemoryStream memoryStream = new MemoryStream();
+        stream.CopyTo(memoryStream);
+
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        ByteReader byteReader = new ByteReader(memoryStream);
 
         // Load metadata.
         this.Type = byteReader.ReadUInt16();

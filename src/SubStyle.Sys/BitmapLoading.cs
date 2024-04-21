@@ -12,12 +12,17 @@ public static class BitmapLoading
 
     public static Bitmap StreamToBitmap(Stream stream)
     {
-        stream.Seek(0, SeekOrigin.Begin);
-        BitmapInfo bitmapInfo = new BitmapInfo(stream);
+        MemoryStream memoryStream = new MemoryStream();
+        stream.CopyTo(memoryStream);
+
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        BitmapInfo bitmapInfo = new BitmapInfo(memoryStream);
         uint width = bitmapInfo.WidthPixels;
 
-        stream.Seek(0, SeekOrigin.Begin);
-        return Bitmap.DecodeToWidth(stream, (int)width);
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        Bitmap bitmap = Bitmap.DecodeToWidth(memoryStream, (int)width);
+
+        return bitmap;
     }
 
     public static string PathToBitmapSummary(string path)
