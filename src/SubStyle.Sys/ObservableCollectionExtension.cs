@@ -1,4 +1,4 @@
-﻿namespace SubStyle.Models.Utils;
+﻿namespace SubStyle.Sys;
 
 using System.Collections.ObjectModel;
 

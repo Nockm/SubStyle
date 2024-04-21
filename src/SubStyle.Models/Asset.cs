@@ -2,7 +2,7 @@
 
 using Avalonia.Media.Imaging;
 using ReactiveUI;
-using SubStyle.Models.Utils;
+using SubStyle.Sys;
 
 public class Asset : ReactiveObject
 {
@@ -47,8 +47,8 @@ public class Asset : ReactiveObject
     {
         string assetPath = Path.GetFileNameWithoutExtension(path);
 
-        this.Description = Convert.PathToBitmapSummary(path);
-        this.Bitmap = Convert.PathToBitmap(path);
+        this.Description = BitmapLoading.PathToBitmapSummary(path);
+        this.Bitmap = BitmapLoading.PathToBitmap(path);
         this.Filename = Path.GetFileNameWithoutExtension(path);
         this.AssetPart = Convert.StringToEnum<AssetParts>(assetPath);
 

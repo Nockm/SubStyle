@@ -1,17 +1,9 @@
-﻿namespace SubStyle.Models.Utils;
+﻿namespace SubStyle.Sys;
 
-using System;
-using System.IO;
 using Avalonia.Media.Imaging;
-using SubStyle.Sys;
 
-public static class Convert
+public static class BitmapLoading
 {
-    public static T StringToEnum<T>(string value)
-    {
-        return (T)Enum.Parse(typeof(T), value, true);
-    }
-
     public static Bitmap PathToBitmap(string path)
     {
         using FileStream stream = File.OpenRead(path);
