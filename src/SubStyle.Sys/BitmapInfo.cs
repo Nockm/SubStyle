@@ -2,14 +2,11 @@
 
 public class BitmapInfo
 {
-    public BitmapInfo(FileStream fileStream)
+    public BitmapInfo(Stream stream)
     {
-        int numBytes = 54;
-        byte[] buffer = new byte[numBytes];
-        fileStream.ReadExactly(buffer, 0, numBytes);
+        ByteReader byteReader = new ByteReader(stream);
 
-        ByteReader byteReader = new ByteReader(buffer);
-
+        // Load metadata.
         this.Type = byteReader.ReadUInt16();
         this.Size = byteReader.ReadUInt32();
         this.Reserved = byteReader.ReadUInt32();
@@ -26,7 +23,14 @@ public class BitmapInfo
         this.TableColorSize = byteReader.ReadUInt32();
         this.ColorCounter = byteReader.ReadUInt32();
 
-        this.Buffer = BitConverter.ToString(buffer);
+        // Add storage for metadata.
+        long numBytesRead = stream.Position;
+        byte[] buffer = new byte[numBytesRead];
+
+        // Dump metadata.
+        stream.Seek(0, SeekOrigin.Begin);
+        stream.ReadExactly(buffer, 0, (int)numBytesRead);
+        this.HeaderHex = BitConverter.ToString(buffer);
     }
 
     public ushort Type { get; set; } // 0-1
@@ -59,7 +63,7 @@ public class BitmapInfo
 
     public uint ColorCounter { get; set; } // 50-53
 
-    public string Buffer { get; set; }
+    public string HeaderHex { get; set; }
 
     public override string ToString()
     {
@@ -88,6 +92,6 @@ public class BitmapInfo
 
         string properties = string.Join(" ", tokens);
 
-        return string.Join("\n", new string[] { this.Buffer, properties });
+        return string.Join("\n", new string[] { this.HeaderHex, properties });
     }
 }

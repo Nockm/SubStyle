@@ -2,17 +2,14 @@
 
 public class ByteReader
 {
-    public ByteReader(byte[] content)
+    public ByteReader(Stream stream)
     {
-        this.Content = content;
-        this.Stream = new MemoryStream(content);
+        this.Stream = stream;
     }
-
-    private byte[] Content { get; set; }
 
     private byte[] Buffer { get; } = new byte[1024];
 
-    private MemoryStream Stream { get; }
+    private Stream Stream { get; }
 
     public int ReadInt32()
     {

@@ -47,7 +47,7 @@ public class Asset : ReactiveObject
     {
         string assetPath = Path.GetFileNameWithoutExtension(path);
 
-        this.Description = Convert.AssessBitmap(path);
+        this.Description = Convert.PathToBitmapSummary(path);
         this.Bitmap = Convert.PathToBitmap(path);
         this.Filename = Path.GetFileNameWithoutExtension(path);
         this.AssetPart = Convert.StringToEnum<AssetParts>(assetPath);
