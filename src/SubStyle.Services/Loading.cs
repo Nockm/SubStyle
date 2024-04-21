@@ -1,7 +1,6 @@
 ﻿namespace SubStyle.Services;
 
 using System.IO.Compression;
-using Avalonia.Media.Imaging;
 using SubStyle.Models;
 using SubStyle.Sys;
 
@@ -16,14 +15,15 @@ public static class Loading
 
     public static Pack LoadPackFromDirectory(string directory)
     {
-        string[] files = Directory.GetFiles(directory);
-
-        List<Asset> assets = files.ToList().ConvertAll(Asset.PathToAsset);
-
         Pack pack = new Pack()
         {
-            Name = directory,
+            Name = new DirectoryInfo(directory).Name,
         };
+
+        var assets = Directory.GetFiles(directory)
+            .ToList()
+            .Where(x => x.EndsWith(".bm2", StringComparison.OrdinalIgnoreCase))
+            .Select(Asset.PathToAsset);
 
         pack.Assets.SetRange(assets);
 
@@ -34,29 +34,19 @@ public static class Loading
     {
         Pack pack = new Pack()
         {
-            Name = path,
-            Notes = "hmm",
+            Name = Path.GetFileNameWithoutExtension(path),
         };
 
         using var fileStream = File.OpenRead(path);
         using ZipArchive zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Read);
 
-        foreach (ZipArchiveEntry entry in zipArchive.Entries)
-        {
-            Asset asset = new Asset();
-            var name = entry.Name;
+        var assets = zipArchive.Entries
+            .ToList()
+            .Where(x => x.Name.EndsWith(".bm2", StringComparison.OrdinalIgnoreCase))
+            .Select(Asset.ZipArchiveEntryToAsset)
+            ;
 
-            if (name.EndsWith(".bM2", StringComparison.OrdinalIgnoreCase))
-            {
-                using Stream stream = entry.Open();
-                Bitmap bitmap = BitmapLoading.StreamToBitmap(stream);
-                asset.Bitmap = bitmap;
-                asset.Filename = Path.GetFileNameWithoutExtension(name);
-                asset.AssetPart = Convert.StringToEnum<AssetParts>(asset.Filename);
-
-                pack.Assets.Add(asset);
-            }
-        }
+        pack.Assets.SetRange(assets);
 
         return pack;
     }
@@ -65,15 +55,26 @@ public static class Loading
     {
         Pack rootGraphics = LoadPackFromDirectory(paths.RootGraphicsDir);
 
-        rootGraphics = LoadPackFromZip(@"C:\Users\justin\AppData\Roaming\SubStyle\mods\trenchrep.zip");
+        IEnumerable<Pack> mods = paths
+            .ListModPaths()
+            .ToList()
+            .Where(x => x.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            .Select(x => LoadPackFromZip(x))
+            ;
+
+        IEnumerable<Pack> scopes = paths
+            .ListScopePaths()
+            .ToList()
+            .Select(x => LoadPackFromDirectory(x))
+            ;
+
         Workspace workspace = new Workspace()
         {
             RootGraphics = rootGraphics,
         };
 
-        workspace.Mods.AddRange(paths.ListMods());
-
-        workspace.Targets.AddRange(paths.ListZones());
+        workspace.Mods.AddRange(mods);
+        workspace.Scopes.AddRange(scopes);
 
         return workspace;
     }

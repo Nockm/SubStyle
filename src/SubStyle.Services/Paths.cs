@@ -33,19 +33,20 @@ public class Paths
         return Path.Combine(this.ZonesDir, zone);
     }
 
-    public string[] ListMods()
+    public string[] ListModPaths()
     {
         return Directory.GetFiles(this.ModsDir)
             .ToList()
-            .Select(x => new DirectoryInfo(x).Name)
+            .Select(x => new DirectoryInfo(x).FullName)
             .ToArray();
     }
 
-    public string[] ListZones()
+    public string[] ListScopePaths()
     {
         return Directory.GetDirectories(this.ZonesDir)
             .ToList()
-            .Select(x => new DirectoryInfo(x).Name)
+            .Select(x => new DirectoryInfo(x).FullName)
+            .Append(this.RootGraphicsDir)
             .ToArray();
     }
 }
