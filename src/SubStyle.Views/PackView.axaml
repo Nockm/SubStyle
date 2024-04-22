@@ -18,6 +18,7 @@
         <dtds:PackDtd />
     </Design.DataContext>
     <DataGrid
+        Margin="0,-1,0,0"
         GridLinesVisibility="None"
         HeadersVisibility="None"
         ItemsSource="{Binding Assets}"

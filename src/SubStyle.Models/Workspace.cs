@@ -2,6 +2,7 @@
 
 using System.Collections.ObjectModel;
 using ReactiveUI;
+using SubStyle.Sys;
 
 public class Workspace : ReactiveObject
 {
@@ -59,5 +60,9 @@ public class Workspace : ReactiveObject
         }
 
         this.RootGraphics = workspace.RootGraphics;
+        this.Mods.SetRange(workspace.Mods);
+        this.Scopes.SetRange(workspace.Scopes);
+        this.SelectedScope = workspace.Scopes.Last();
+        this.SelectedMod = workspace.Mods.Last();
     }
 }
