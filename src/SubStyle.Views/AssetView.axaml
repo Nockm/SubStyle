@@ -4,33 +4,67 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dtds="using:SubStyle.Views.Dtds"
+    xmlns:ei="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+    xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+    xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:SubStyle.Models"
     xmlns:services="using:SubStyle.Services"
-    Margin="0,0,0,0"
-    d:DesignHeight="200"
-    d:DesignWidth="400"
+    Width="180"
+    Height="70"
+    Margin="2"
     x:DataType="models:Asset"
     mc:Ignorable="d"
     >
     <Design.DataContext>
         <dtds:AssetDtd />
     </Design.DataContext>
-    <StackPanel Orientation="Horizontal">
-        <Image
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Source="{Binding Bitmap}"
-            />
-        <TextBlock
-            Width="80"
-            VerticalAlignment="Center"
-            Text="{Binding Filename}"
-            />
-        <TextBlock
-            VerticalAlignment="Center"
-            FontFamily="Courier New"
-            Text="{Binding Description}"
-            />
-    </StackPanel>
+    <UserControl.Styles>
+        <Style Selector="Border.Text">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="2" />
+        </Style>
+        <Style Selector="TextBlock.Text">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontWeight" Value="Black" />
+        </Style>
+    </UserControl.Styles>
+    <Border>
+        <i:Interaction.Behaviors>
+            <ei:DataTriggerBehavior
+                Binding="{Binding Picked}"
+                ComparisonCondition="Equal"
+                Value="True"
+                >
+                <ei:ChangePropertyAction PropertyName="Background" Value="Gray" />
+            </ei:DataTriggerBehavior>
+        </i:Interaction.Behaviors>
+        <DockPanel Margin="8,0">
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding Picked}" />
+            <StackPanel VerticalAlignment="Center">
+                <Border Classes="Text">
+                    <TextBlock Classes="Text" FontSize="16">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}">
+                                <Binding Path="AssetPart" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Border>
+                <Border Classes="Text">
+                    <TextBlock Classes="Text">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0}x{1}">
+                                <Binding Path="Bitmap.PixelSize.Width" />
+                                <Binding Path="Bitmap.PixelSize.Height" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+            <Border HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Image Width="40" Source="{Binding Bitmap}" />
+            </Border>
+        </DockPanel>
+    </Border>
 </UserControl>

@@ -15,6 +15,8 @@ public class Asset : ReactiveObject
 
     private string description = "description unset";
 
+    private bool picked;
+
     public Bitmap? Bitmap
     {
         get => this.bitmap;
@@ -37,6 +39,12 @@ public class Asset : ReactiveObject
     {
         get => this.description;
         set => this.RaiseAndSetIfChanged(ref this.description, value);
+    }
+
+    public bool Picked
+    {
+        get => this.picked;
+        set => this.RaiseAndSetIfChanged(ref this.picked, value);
     }
 
     public static Asset ZipArchiveEntryToAsset(ZipArchiveEntry entry)

@@ -3,12 +3,18 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dtds="using:SubStyle.Views.Dtds"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:SubStyle.Models"
     xmlns:views="using:SubStyle.Views"
     Title="SubStyle"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    x:DataType="models:Workspace"
     mc:Ignorable="d"
     >
+    <Design.DataContext>
+        <dtds:WorkspaceDtd />
+    </Design.DataContext>
     <views:WorkspaceView />
 </Window>

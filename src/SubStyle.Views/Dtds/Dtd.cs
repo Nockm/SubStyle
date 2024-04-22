@@ -25,6 +25,10 @@ public class PackDtd : Pack
     public PackDtd()
     {
         this.CopyFrom(Dtd.Pack);
+
+        this.Assets[3].Picked = true;
+        this.Assets[5].Picked = true;
+        this.Assets[6].Picked = true;
     }
 }
 
