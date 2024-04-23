@@ -2,11 +2,102 @@
     x:Class="SubStyle.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    RequestedThemeVariant="Dark">
+    xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
+    RequestedThemeVariant="Dark"
+    >
     <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
-
+    <Application.Resources>
+        <!--
+            https://github.com/AvaloniaUI/Avalonia/discussions/12399
+            Fix: Unable to change color of datagrid header and rows separator
+        -->
+        <SolidColorBrush x:Key="DataGridGridLinesBrush">Transparent</SolidColorBrush>
+    </Application.Resources>
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme DensityStyle="Compact">
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light" />
+                <ColorPaletteResources
+                    x:Key="Dark"
+                    BaseHigh="#DDD"
+                    RegionColor="#222"
+                    />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+        <!--
+            ColorPaletteResources reference
+        -->
+        <!--
+        <ColorPaletteResources
+            x:Key="Dark"
+            Accent="Red"
+            AltHigh="Red"
+            AltLow="Red"
+            AltMedium="Red"
+            AltMediumHigh="Red"
+            AltMediumLow="Red"
+            BaseHigh="Red"
+            BaseLow="Red"
+            BaseMedium="Red"
+            BaseMediumHigh="Red"
+            BaseMediumLow="Red"
+            ChromeAltLow="Red"
+            ChromeBlackHigh="Red"
+            ChromeBlackLow="Red"
+            ChromeBlackMedium="Red"
+            ChromeBlackMediumLow="Red"
+            ChromeDisabledHigh="Red"
+            ChromeDisabledLow="Red"
+            ChromeGray="Red"
+            ChromeHigh="Red"
+            ChromeLow="Red"
+            ChromeMedium="Red"
+            ChromeMediumLow="Red"
+            ChromeWhite="Red"
+            ErrorText="Red"
+            ListLow="Red"
+            ListMedium="Red"
+            RegionColor="#333"
+            />
+        -->
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        <!--  Styles: Spacing  -->
+        <Style Selector=":is(Control).m0">
+            <Setter Property="Margin" Value="32" />
+        </Style>
+        <Style Selector=":is(Control).m1">
+            <Setter Property="Margin" Value="16" />
+        </Style>
+        <Style Selector=":is(Control).m2">
+            <Setter Property="Margin" Value="8" />
+        </Style>
+        <Style Selector=":is(Control).m3">
+            <Setter Property="Margin" Value="4" />
+        </Style>
+        <!--  Styles: Font  -->
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="TextBlock.h2">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+        <Style Selector="TextBlock.h3">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style Selector="TextBlock.h4">
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+        <Style Selector="TextBlock.h5">
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style Selector="TextBlock.h6">
+            <Setter Property="FontSize" Value="8" />
+        </Style>
+        <!--  Styles: Misc  -->
+        <Style Selector=":is(Control).docktop">
+            <Setter Property="DockPanel.Dock" Value="Top" />
+        </Style>
     </Application.Styles>
 </Application>

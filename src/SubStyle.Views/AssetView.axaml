@@ -10,49 +10,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:SubStyle.Models"
     xmlns:services="using:SubStyle.Services"
-    Width="180"
-    Height="70"
-    Margin="2"
+    Width="150"
     x:DataType="models:Asset"
     mc:Ignorable="d"
     >
     <Design.DataContext>
         <dtds:AssetDtd />
     </Design.DataContext>
-    <UserControl.Styles>
-        <Style Selector="Border.Text">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="2" />
-        </Style>
-        <Style Selector="TextBlock.Text">
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="FontWeight" Value="Black" />
-        </Style>
-    </UserControl.Styles>
-    <Border>
-        <i:Interaction.Behaviors>
-            <ei:DataTriggerBehavior
-                Binding="{Binding Picked}"
-                ComparisonCondition="Equal"
-                Value="True"
-                >
-                <ei:ChangePropertyAction PropertyName="Background" Value="Gray" />
-            </ei:DataTriggerBehavior>
-        </i:Interaction.Behaviors>
-        <DockPanel Margin="8,0">
-            <CheckBox VerticalAlignment="Center" IsChecked="{Binding Picked}" />
-            <StackPanel VerticalAlignment="Center">
-                <Border Classes="Text">
-                    <TextBlock Classes="Text" FontSize="16">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0}">
-                                <Binding Path="AssetPart" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </Border>
-                <Border Classes="Text">
-                    <TextBlock Classes="Text">
+    <Border HorizontalAlignment="Stretch">
+        <DockPanel>
+            <Border Classes="h2">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock
+                        Classes="Text h4"
+                        FontWeight="Bold"
+                        Text="{Binding AssetPart}"
+                        />
+                    <TextBlock Classes="Text h5">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0}x{1}">
                                 <Binding Path="Bitmap.PixelSize.Width" />
@@ -60,10 +34,15 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                </Border>
-            </StackPanel>
-            <Border HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Image Width="40" Source="{Binding Bitmap}" />
+                </StackPanel>
+            </Border>
+            <Border Classes="m3" />
+            <Border
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Classes="m3"
+                >
+                <Image Height="40" Source="{Binding Bitmap}" />
             </Border>
         </DockPanel>
     </Border>

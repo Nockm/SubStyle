@@ -17,20 +17,13 @@
     <Design.DataContext>
         <dtds:PackDtd />
     </Design.DataContext>
-    <DataGrid
-        Margin="0,-1,0,0"
-        GridLinesVisibility="None"
-        HeadersVisibility="None"
-        ItemsSource="{Binding Assets}"
-        >
-        <DataGrid.Columns>
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <views:AssetView />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </DataGrid>
+    <Grid>
+        <ListBox ItemsSource="{Binding Assets}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <views:AssetView Classes="m3" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

@@ -17,70 +17,51 @@
         <dtds:WorkspaceDtd />
     </Design.DataContext>
     <UserControl.Styles>
-        <StyleInclude Source="Resources/Styles.axaml" />
-        <Style Selector="Border.Pack">
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="#111" />
-            <Setter Property="Background" Value="#111" />
-            <Setter Property="CornerRadius" Value="8" />
-        </Style>
         <Style Selector="TextBlock.PackHeader">
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
         <Style Selector="ComboBox.PackChooser">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
-        <Style Selector="views|PackView">
-            <Setter Property="Opacity" Value="1" />
-        </Style>
     </UserControl.Styles>
-    <Border>
-        <StackPanel Orientation="Horizontal">
-            <Border Classes="h1 Pack" DockPanel.Dock="Top">
-                <DockPanel>
-                    <Border Classes="h2" DockPanel.Dock="Top">
-                        <TextBlock Classes="PackHeader h2">Mod</TextBlock>
-                    </Border>
-                    <Border Classes="h2" DockPanel.Dock="Top">
-                        <ComboBox
-                            Classes="PackChooser"
-                            DockPanel.Dock="Top"
-                            ItemsSource="{Binding Mods}"
-                            PlaceholderText="Select mod to apply"
-                            SelectedItem="{Binding SelectedMod}"
-                            >
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </Border>
-                    <views:PackView DataContext="{Binding SelectedMod}" />
-                </DockPanel>
-            </Border>
-            <Border Classes="h1 Pack">
-                <DockPanel>
-                    <Border Classes="h2" DockPanel.Dock="Top">
-                        <TextBlock Classes="PackHeader h2">Scope</TextBlock>
-                    </Border>
-                    <Border Classes="h2" DockPanel.Dock="Top">
-                        <ComboBox
-                            Classes="PackChooser"
-                            ItemsSource="{Binding Scopes}"
-                            PlaceholderText="Select scope to apply the mod onto"
-                            SelectedItem="{Binding SelectedScope}"
-                            >
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </Border>
-                    <views:PackView DataContext="{Binding SelectedScope}" />
-                </DockPanel>
-            </Border>
-        </StackPanel>
-    </Border>
+    <StackPanel Orientation="Horizontal">
+        <!--  Mod  -->
+        <Border Classes="h1 m1 Pack">
+            <DockPanel>
+                <TextBlock Classes="PackHeader h2 m2 docktop">Mod</TextBlock>
+                <ComboBox
+                    Classes="PackChooser m2 docktop"
+                    ItemsSource="{Binding Mods}"
+                    PlaceholderText="Select mod to apply"
+                    SelectedItem="{Binding SelectedMod}"
+                    >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <views:PackView DataContext="{Binding SelectedMod}" />
+            </DockPanel>
+        </Border>
+        <!--  Scope  -->
+        <Border Classes="h1 m1 Pack">
+            <DockPanel>
+                <TextBlock Classes="PackHeader h2 m2 docktop">Scope</TextBlock>
+                <ComboBox
+                    Classes="PackChooser m2 docktop"
+                    ItemsSource="{Binding Scopes}"
+                    PlaceholderText="Select scope to apply the mod onto"
+                    SelectedItem="{Binding SelectedScope}"
+                    >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <views:PackView DataContext="{Binding SelectedScope}" />
+            </DockPanel>
+        </Border>
+    </StackPanel>
 </UserControl>

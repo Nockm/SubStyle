@@ -8,6 +8,8 @@
     xmlns:models="using:SubStyle.Models"
     xmlns:views="using:SubStyle.Views"
     Title="SubStyle"
+    Width="800"
+    Height="600"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="models:Workspace"
