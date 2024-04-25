@@ -1,4 +1,4 @@
-namespace SubStyle.Models;
+﻿namespace SubStyle.Models;
 
 public enum AssetParts
 {
@@ -69,6 +69,14 @@ public enum AssetParts
     ROCKET,
     SHIELD,
     SHIPS,
+    SHIP1,
+    SHIP2,
+    SHIP3,
+    SHIP4,
+    SHIP5,
+    SHIP6,
+    SHIP7,
+    SHIP8,
     SHRAPNEL,
     SHROLL,
     SHRTFONT,
