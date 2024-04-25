@@ -1,4 +1,4 @@
-namespace SubStyle.Models;
+﻿namespace SubStyle.Models;
 
 using System.IO.Compression;
 using Avalonia.Media.Imaging;
@@ -49,13 +49,15 @@ public class Asset : ReactiveObject
 
     public static Asset ZipArchiveEntryToAsset(ZipArchiveEntry entry)
     {
-        Asset asset = new Asset();
+        using var entryStream = entry.Open();
 
-        var name = entry.Name;
-        using Stream stream = entry.Open();
-        Bitmap bitmap = BitmapLoading.StreamToBitmap(stream);
-        asset.Bitmap = bitmap;
-        asset.Filename = Path.GetFileNameWithoutExtension(name);
+        using var memoryStream = new MemoryStream();
+        entryStream.CopyTo(memoryStream);
+        memoryStream.Seek(0, SeekOrigin.Begin);
+
+        Asset asset = new Asset();
+        asset.Bitmap = new Bitmap(memoryStream);
+        asset.Filename = Path.GetFileNameWithoutExtension(entry.Name);
         asset.AssetPart = Convert.StringToEnum<AssetParts>(asset.Filename);
 
         return asset;
@@ -70,8 +72,8 @@ public class Asset : ReactiveObject
     {
         string assetPath = Path.GetFileNameWithoutExtension(path);
 
-        this.Description = BitmapLoading.PathToBitmapSummary(path);
-        this.Bitmap = BitmapLoading.PathToBitmap(path);
+        this.Bitmap = new Bitmap(path);
+        this.Description = string.Empty;
         this.Filename = Path.GetFileNameWithoutExtension(path);
         this.AssetPart = GetAssetPart(assetPath);
 
