@@ -28,6 +28,14 @@ public class Paths
 
     public string ModsDir { get; set; }
 
+    public static void EnsureDirExists(string dir)
+    {
+        if (!Path.Exists(dir))
+        {
+            Directory.CreateDirectory(dir);
+        }
+    }
+
     public string GetZoneDir(string zone)
     {
         return Path.Combine(this.ZonesDir, zone);
@@ -35,6 +43,8 @@ public class Paths
 
     public string[] ListModPaths()
     {
+        EnsureDirExists(this.ModsDir);
+
         return Directory.GetFiles(this.ModsDir)
             .ToList()
             .Select(x => new DirectoryInfo(x).FullName)
