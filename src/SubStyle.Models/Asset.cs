@@ -1,4 +1,4 @@
-﻿namespace SubStyle.Models;
+namespace SubStyle.Models;
 
 using System.IO.Compression;
 using Avalonia.Media.Imaging;
@@ -73,7 +73,7 @@ public class Asset : ReactiveObject
         this.Description = BitmapLoading.PathToBitmapSummary(path);
         this.Bitmap = BitmapLoading.PathToBitmap(path);
         this.Filename = Path.GetFileNameWithoutExtension(path);
-        this.AssetPart = Convert.StringToEnum<AssetParts>(assetPath);
+        this.AssetPart = GetAssetPart(assetPath);
 
         return this;
     }
@@ -88,5 +88,17 @@ public class Asset : ReactiveObject
         this.AssetPart = asset.AssetPart;
         this.Bitmap = asset.Bitmap;
         this.Filename = asset.Filename;
+    }
+
+    private static AssetParts GetAssetPart(string assetPath)
+    {
+        try
+        {
+            return Convert.StringToEnum<AssetParts>(assetPath);
+        }
+        catch (ArgumentException)
+        {
+            return AssetParts.UNKNOWN;
+        }
     }
 }

@@ -1,7 +1,8 @@
-﻿namespace SubStyle.Models;
+namespace SubStyle.Models;
 
 public enum AssetParts
 {
+    UNKNOWN,
     BG01,
     BG02,
     BG03,
