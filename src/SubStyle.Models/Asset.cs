@@ -1,5 +1,6 @@
 ﻿namespace SubStyle.Models;
 
+using System.Diagnostics;
 using System.IO.Compression;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -47,6 +48,12 @@ public class Asset : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref this.picked, value);
     }
 
+    public static void ValidateBitmap(Bitmap bitmap)
+    {
+        Trace.Assert(bitmap.PixelSize.Width == bitmap.Size.Width);
+        Trace.Assert(bitmap.PixelSize.Height == bitmap.Size.Height);
+    }
+
     public static Asset ZipArchiveEntryToAsset(ZipArchiveEntry entry)
     {
         using var entryStream = entry.Open();
@@ -59,6 +66,8 @@ public class Asset : ReactiveObject
         asset.Bitmap = new Bitmap(memoryStream);
         asset.Filename = Path.GetFileNameWithoutExtension(entry.Name);
         asset.AssetPart = Convert.StringToEnum<AssetParts>(asset.Filename);
+
+        ValidateBitmap(asset.Bitmap);
 
         return asset;
     }
@@ -76,6 +85,8 @@ public class Asset : ReactiveObject
         this.Description = string.Empty;
         this.Filename = Path.GetFileNameWithoutExtension(path);
         this.AssetPart = GetAssetPart(assetPath);
+
+        ValidateBitmap(this.Bitmap);
 
         return this;
     }
