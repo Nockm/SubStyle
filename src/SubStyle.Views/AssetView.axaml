@@ -17,45 +17,49 @@
     <Design.DataContext>
         <dtds:AssetDtd />
     </Design.DataContext>
-    <Border HorizontalAlignment="Stretch">
-        <DockPanel>
-            <Border Classes="h2">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock
-                        Classes="Text h4"
-                        FontWeight="Bold"
-                        Text="{Binding AssetPart}"
-                        />
-                    <TextBlock Classes="Text h5">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0}x{1}">
-                                <Binding Path="Bitmap.PixelSize.Width" />
-                                <Binding Path="Bitmap.PixelSize.Height" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </StackPanel>
-            </Border>
-            <Border Classes="m3" />
-            <Border
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Classes="m3"
+    <DockPanel>
+        <!--  Left side  -->
+        <Border Classes="h2">
+            <!--  Info stack  -->
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock
+                    Classes="Text h4"
+                    FontWeight="Bold"
+                    Text="{Binding AssetPart}"
+                    />
+                <TextBlock Classes="Text h5">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}x{1}">
+                            <Binding Path="Bitmap.PixelSize.Width" />
+                            <Binding Path="Bitmap.PixelSize.Height" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+        <!--  Spacer  -->
+        <Border Classes="m3" />
+        <!--  Right side  -->
+        <Border
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Classes="m3"
+            >
+            <Image
+                Height="40"
+                Source="{Binding Bitmap}"
+                ToolTip.ShowDelay="0"
                 >
-                <Image
-                    Height="40"
-                    Source="{Binding Bitmap}"
-                    ToolTip.ShowDelay="0"
-                    >
-                    <!--
-                        https://github.com/AvaloniaUI/Avalonia/issues/5408
-                        Tooltip has a MaxWidth, which crops the image if exceeded.
-                    -->
-                    <ToolTip.Tip>
-                        <Image Width="{Binding Bitmap.Size.Width}" Source="{Binding Bitmap}" />
-                    </ToolTip.Tip>
-                </Image>
-            </Border>
-        </DockPanel>
-    </Border>
+                <!--
+                    Use ToolTip to create a Preview Overlay on MouseOver
+                    
+                    https://github.com/AvaloniaUI/Avalonia/issues/5408
+                    Tooltip has a MaxWidth, which crops the image if exceeded.
+                -->
+                <ToolTip.Tip>
+                    <Image Width="{Binding Bitmap.Size.Width}" Source="{Binding Bitmap}" />
+                </ToolTip.Tip>
+            </Image>
+        </Border>
+    </DockPanel>
 </UserControl>
