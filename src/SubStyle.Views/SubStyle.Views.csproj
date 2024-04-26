@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="PackChoiceView.axaml.cs">
+      <DependentUpon>PackChoiceView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="PackView.axaml.cs">
       <DependentUpon>PackView.axaml</DependentUpon>
     </Compile>

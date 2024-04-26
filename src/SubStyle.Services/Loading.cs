@@ -73,8 +73,8 @@ public static class Loading
             RootGraphics = rootGraphics,
         };
 
-        workspace.Mods.AddRange(mods);
-        workspace.Scopes.AddRange(scopes);
+        workspace.ModPackChoice.Items.SetRange(mods);
+        workspace.ScopePackChoice.Items.SetRange(scopes);
 
         return workspace;
     }

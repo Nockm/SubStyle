@@ -8,9 +8,7 @@
     xmlns:models="using:SubStyle.Models"
     xmlns:services="using:SubStyle.Services"
     xmlns:views="using:SubStyle.Views"
-    Margin="16"
     d:DesignHeight="800"
-    d:DesignWidth="300"
     x:DataType="models:Pack"
     mc:Ignorable="d"
     >

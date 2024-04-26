@@ -2,10 +2,13 @@
 using System.Linq;
 using SubStyle.Models;
 using SubStyle.Services;
+using SubStyle.Sys;
 
 public static class Dtd
 {
     public static Workspace Workspace { get; } = Loading.LoadWorkspace();
+
+    public static PackChoice PackChoice { get; } = Workspace.ModPackChoice;
 
     public static Pack? Pack { get; } = Workspace.RootGraphics;
 
@@ -17,6 +20,17 @@ public class WorkspaceDtd : Workspace
     public WorkspaceDtd()
     {
         this.CopyFrom(Dtd.Workspace);
+    }
+}
+
+public class PackChoiceDtd : PackChoice
+{
+    public PackChoiceDtd()
+    {
+        PackChoice packChoice = Dtd.Workspace.ModPackChoice;
+
+        this.Items.SetRange(packChoice.Items);
+        this.SelectedItem = packChoice.Items[0];
     }
 }
 

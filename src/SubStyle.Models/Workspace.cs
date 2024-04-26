@@ -1,40 +1,25 @@
 ﻿namespace SubStyle.Models;
 
-using System.Collections.ObjectModel;
 using ReactiveUI;
-using SubStyle.Sys;
 
 public class Workspace : ReactiveObject
 {
-    private Pack? selectedMod;
-    private ObservableCollection<Pack> mods = new ObservableCollection<Pack>();
+    private PackChoice modPackChoice = new PackChoice();
 
-    private Pack? selectedScope;
-    private ObservableCollection<Pack> scopes = new ObservableCollection<Pack>();
+    private PackChoice scopePackChoice = new PackChoice();
 
     private Pack? rootGraphics;
+
     private Pack? previewGraphics;
 
-    public Pack? SelectedMod
+    public PackChoice ModPackChoice
     {
-        get => this.selectedMod;
-        set => this.RaiseAndSetIfChanged(ref this.selectedMod, value);
+        get => this.modPackChoice;
     }
 
-    public ObservableCollection<Pack> Mods
+    public PackChoice ScopePackChoice
     {
-        get => this.mods;
-    }
-
-    public Pack? SelectedScope
-    {
-        get => this.selectedScope;
-        set => this.RaiseAndSetIfChanged(ref this.selectedScope, value);
-    }
-
-    public ObservableCollection<Pack> Scopes
-    {
-        get => this.scopes;
+        get => this.scopePackChoice;
     }
 
     public Pack? RootGraphics
@@ -59,10 +44,9 @@ public class Workspace : ReactiveObject
             return;
         }
 
-        this.RootGraphics = workspace.RootGraphics;
-        this.Mods.SetRange(workspace.Mods);
-        this.Scopes.SetRange(workspace.Scopes);
-        this.SelectedScope = workspace.Scopes.Last();
-        this.SelectedMod = workspace.Mods.Last();
+        this.RootGraphics?.CopyFrom(workspace.RootGraphics);
+        this.PreviewGraphics?.CopyFrom(workspace.PreviewGraphics);
+        this.ModPackChoice.CopyFrom(workspace.ModPackChoice);
+        this.ScopePackChoice.CopyFrom(workspace.ScopePackChoice);
     }
 }

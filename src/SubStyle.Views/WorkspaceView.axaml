@@ -8,82 +8,15 @@
     xmlns:models="using:SubStyle.Models"
     xmlns:services="using:SubStyle.Services"
     xmlns:views="using:SubStyle.Views"
-    d:DesignHeight="1200"
-    d:DesignWidth="800"
+    d:DesignHeight="600"
     x:DataType="models:Workspace"
     mc:Ignorable="d"
     >
     <Design.DataContext>
         <dtds:WorkspaceDtd />
     </Design.DataContext>
-    <UserControl.Styles>
-        <Style Selector="TextBlock.PackHeader">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-        <Style Selector="ComboBox.PackChooser">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-        </Style>
-    </UserControl.Styles>
     <StackPanel Orientation="Horizontal">
-        <!--  Mod  -->
-        <Border Classes="h1 m1 Pack">
-            <DockPanel>
-                <TextBlock Classes="PackHeader h2 m2 docktop">Mod</TextBlock>
-                <ComboBox
-                    Classes="PackChooser m2 docktop"
-                    ItemsSource="{Binding Mods}"
-                    SelectedItem="{Binding SelectedMod}"
-                    >
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}">
-                                <TextBlock.Text>
-                                    <!--  Would like to use ComboBox.PlaceholderText, but it doesn't play nice with MultiBinding  -->
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding FallbackValue="Select mod to apply" Path="Name" />
-                                        <Binding
-                                            FallbackValue=""
-                                            Path="Assets.Count"
-                                            StringFormat="{}({0})"
-                                            />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <views:PackView DataContext="{Binding SelectedMod}" />
-            </DockPanel>
-        </Border>
-        <!--  Scope  -->
-        <Border Classes="h1 m1 Pack">
-            <DockPanel>
-                <TextBlock Classes="PackHeader h2 m2 docktop">Scope</TextBlock>
-                <ComboBox
-                    Classes="PackChooser m2 docktop"
-                    ItemsSource="{Binding Scopes}"
-                    SelectedItem="{Binding SelectedScope}"
-                    >
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}">
-                                <TextBlock.Text>
-                                    <!--  Would like to use ComboBox.PlaceholderText, but it doesn't play nice with MultiBinding  -->
-                                    <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding FallbackValue="Select scope to apply the mod onto" Path="Name" />
-                                        <Binding
-                                            FallbackValue=""
-                                            Path="Assets.Count"
-                                            StringFormat="{}({0})"
-                                            />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <views:PackView DataContext="{Binding SelectedScope}" />
-            </DockPanel>
-        </Border>
+        <views:PackChoiceView DataContext="{Binding ScopePackChoice}" Prompt="Select what to modify" />
+        <views:PackChoiceView DataContext="{Binding ModPackChoice}" Prompt="Select mod to apply" />
     </StackPanel>
 </UserControl>
