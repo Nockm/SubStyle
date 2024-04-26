@@ -18,7 +18,8 @@
         <dtds:PackDtd />
     </Design.DataContext>
     <Grid>
-        <ListBox ItemsSource="{Binding Assets}">
+        <!--  Use padding to stop vertical scrollbar overlapping with content  -->
+        <ListBox Padding="0,0,16,0" ItemsSource="{Binding Assets}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <views:AssetView Classes="m3" />
