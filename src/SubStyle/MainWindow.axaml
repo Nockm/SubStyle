@@ -13,6 +13,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="models:Workspace"
+    SizeToContent="Width"
     mc:Ignorable="d"
     >
     <Design.DataContext>
