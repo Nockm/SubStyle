@@ -42,7 +42,19 @@
                 VerticalAlignment="Center"
                 Classes="m3"
                 >
-                <Image Height="40" Source="{Binding Bitmap}" />
+                <Image
+                    Height="40"
+                    Source="{Binding Bitmap}"
+                    ToolTip.ShowDelay="0"
+                    >
+                    <!--
+                        https://github.com/AvaloniaUI/Avalonia/issues/5408
+                        Tooltip has a MaxWidth, which crops the image if exceeded.
+                    -->
+                    <ToolTip.Tip>
+                        <Image Width="{Binding Bitmap.Size.Width}" Source="{Binding Bitmap}" />
+                    </ToolTip.Tip>
+                </Image>
             </Border>
         </DockPanel>
     </Border>
