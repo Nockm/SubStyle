@@ -15,8 +15,46 @@
     <Design.DataContext>
         <dtds:WorkspaceDtd />
     </Design.DataContext>
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Button.Hidden">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="IsEnabled" Value="False" />
+        </Style>
+    </UserControl.Styles>
     <StackPanel Orientation="Horizontal">
-        <views:PackChoiceView DataContext="{Binding ScopePackChoice}" Prompt="Select what to modify" />
-        <views:PackChoiceView DataContext="{Binding ModPackChoice}" Prompt="Select mod to apply" />
+        <DockPanel>
+            <Border DockPanel.Dock="Bottom">
+                <Button Classes="m3 Hidden" Content="Delete Selected" />
+            </Border>
+            <views:PackChoiceView DataContext="{Binding ModPackChoice}" Prompt="Select mod to apply" />
+        </DockPanel>
+        <Border Classes="m1">
+            <Button
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding CopySelectedModItemsToScope}"
+                >
+                <Button.Content>
+                    <MultiBinding StringFormat="{}{0}x{1}">
+                        <Binding Path="ModPackChoice.SelectedItem.SelectedAssets.Count" />
+                        <Binding Path="ScopePackChoice.SelectedItem.SelectedAssets.Count" />
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+        </Border>
+        <DockPanel LastChildFill="False">
+            <Border DockPanel.Dock="Bottom">
+                <Button
+                    Classes="m3"
+                    Command="{Binding DeleteSelectedScopeItems}"
+                    Content="Delete Selected"
+                    />
+            </Border>
+            <views:PackChoiceView DataContext="{Binding ScopePackChoice}" Prompt="Select what to modify" />
+        </DockPanel>
     </StackPanel>
 </UserControl>

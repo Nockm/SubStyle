@@ -15,14 +15,17 @@
     <Design.DataContext>
         <dtds:PackDtd />
     </Design.DataContext>
-    <Grid>
-        <!--  Use padding to stop vertical scrollbar overlapping with content  -->
-        <ListBox Padding="0,0,16,0" ItemsSource="{Binding Assets}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <views:AssetView Classes="m3" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+    <!--  Use padding to stop vertical scrollbar overlapping with content  -->
+    <ListBox
+        Padding="0,0,16,0"
+        ItemsSource="{Binding Assets}"
+        SelectedItems="{Binding SelectedAssets}"
+        SelectionMode="Multiple"
+        >
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <views:AssetView Classes="m3" />
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </UserControl>

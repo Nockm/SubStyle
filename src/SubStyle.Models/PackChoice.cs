@@ -1,5 +1,6 @@
 ﻿namespace SubStyle.Models;
 
+using System;
 using System.Collections.ObjectModel;
 using ReactiveUI;
 using SubStyle.Sys;
@@ -25,5 +26,10 @@ public class PackChoice : ReactiveObject
     {
         this.SelectedItem = packChoice.SelectedItem;
         this.Items.SetRange(packChoice.Items);
+    }
+
+    internal void Overwrite(ObservableCollection<Asset> assetsToCopy)
+    {
+        throw new NotImplementedException();
     }
 }

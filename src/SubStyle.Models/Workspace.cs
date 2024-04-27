@@ -49,4 +49,21 @@ public class Workspace : ReactiveObject
         this.ModPackChoice.CopyFrom(workspace.ModPackChoice);
         this.ScopePackChoice.CopyFrom(workspace.ScopePackChoice);
     }
+
+    public void CopySelectedModItemsToScope()
+    {
+        if (this.ModPackChoice.SelectedItem == null)
+        {
+            return;
+        }
+
+        var assetsToCopy = this.ModPackChoice.SelectedItem.SelectedAssets;
+
+        this.ScopePackChoice.Overwrite(assetsToCopy);
+    }
+
+    public void DeleteSelectedScopeItems()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -24,6 +24,8 @@ public class Pack : ReactiveObject
 
     public ObservableCollection<Asset> Assets { get; } = new ObservableCollection<Asset>();
 
+    public ObservableCollection<Asset> SelectedAssets { get; } = new ObservableCollection<Asset>();
+
     public void CopyFrom(Pack? pack)
     {
         if (pack == null)

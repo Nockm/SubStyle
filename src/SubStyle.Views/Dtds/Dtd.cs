@@ -20,6 +20,46 @@ public class WorkspaceDtd : Workspace
     public WorkspaceDtd()
     {
         this.CopyFrom(Dtd.Workspace);
+
+        // Dream up mod selection
+        {
+            Pack? selectedPack = this.ModPackChoice.Items.First(x => x.Assets.Count > 6);
+
+            if (selectedPack == null)
+            {
+                return;
+            }
+
+            selectedPack.SelectedAssets.SetRange(
+                new List<Asset>()
+                {
+                selectedPack.Assets[2],
+                selectedPack.Assets[4],
+                selectedPack.Assets[5],
+                });
+
+            this.ModPackChoice.SelectedItem = selectedPack;
+        }
+
+        // Dream up scope selection
+        {
+            Pack? selectedPack = this.ScopePackChoice.Items.First(x => x.Assets.Count > 6);
+
+            if (selectedPack == null)
+            {
+                return;
+            }
+
+            selectedPack.SelectedAssets.SetRange(
+                new List<Asset>()
+                {
+                selectedPack.Assets[1],
+                selectedPack.Assets[3],
+                selectedPack.Assets[5],
+                });
+
+            this.ScopePackChoice.SelectedItem = selectedPack;
+        }
     }
 }
 

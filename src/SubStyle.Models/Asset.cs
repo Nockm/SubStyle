@@ -14,6 +14,8 @@ public class Asset : ReactiveObject
 
     private string filename = "filename unset";
 
+    private string? fullpath;
+
     private string description = "description unset";
 
     private bool picked;
@@ -34,6 +36,12 @@ public class Asset : ReactiveObject
     {
         get => this.filename;
         set => this.RaiseAndSetIfChanged(ref this.filename, value);
+    }
+
+    public string? FullPath
+    {
+        get => this.fullpath;
+        set => this.RaiseAndSetIfChanged(ref this.fullpath, value);
     }
 
     public string Description
@@ -101,6 +109,16 @@ public class Asset : ReactiveObject
         this.AssetPart = asset.AssetPart;
         this.Bitmap = asset.Bitmap;
         this.Filename = asset.Filename;
+    }
+
+    public void SaveTo(string path)
+    {
+        if (this.Bitmap == null)
+        {
+            return;
+        }
+
+        this.Bitmap.Save(path);
     }
 
     private static AssetParts GetAssetPart(string assetPath)
