@@ -1,8 +1,9 @@
 ﻿namespace SubStyle.Models;
 
+using System.Reactive;
 using ReactiveUI;
 
-public class Workspace : ReactiveObject
+public partial class Workspace : ReactiveObject
 {
     private PackChoice modPackChoice = new PackChoice();
 
@@ -49,9 +50,28 @@ public class Workspace : ReactiveObject
         this.ModPackChoice.CopyFrom(workspace.ModPackChoice);
         this.ScopePackChoice.CopyFrom(workspace.ScopePackChoice);
     }
+}
 
-    public void CopySelectedModItemsToScope()
+/// <summary>
+/// Command.
+/// </summary>
+public partial class Workspace : ReactiveObject
+{
+    private ReactiveCommand<Unit, Unit>? applyModCommand;
+
+    public ReactiveCommand<Unit, Unit> ApplyModCommand => this.applyModCommand ??= ReactiveCommand.Create(this.DoApplyMod, this.CanApplyMod());
+
+    private IObservable<bool> CanApplyMod()
     {
+        return this.WhenAnyValue(
+                x => x.ScopePackChoice.SelectedPack,
+                x => x.ModPackChoice.SelectedPack!.SelectedAssets.Count,
+                (selectedScopePack, numSelectedAssetsFromModPack) => (numSelectedAssetsFromModPack > 0) && (selectedScopePack != null));
+    }
+
+    private void DoApplyMod()
+    {
+        System.Diagnostics.Debug.WriteLine("Running DoApplyMod...");
         if (this.ModPackChoice.SelectedPack == null)
         {
             return;
@@ -61,9 +81,27 @@ public class Workspace : ReactiveObject
 
         this.ScopePackChoice.Overwrite(assetsToCopy);
     }
+}
 
-    public void DeleteSelectedScopeItems()
+/// <summary>
+/// Command.
+/// </summary>
+public partial class Workspace : ReactiveObject
+{
+    private ReactiveCommand<Unit, Unit>? deleteScopeCommand;
+
+    public ReactiveCommand<Unit, Unit> DeleteSelectedScopeItemsCommand => this.deleteScopeCommand ??= ReactiveCommand.Create(this.DoDeleteSelectedScopeItems, this.CanDeleteSelectedScopeItems());
+
+    private IObservable<bool> CanDeleteSelectedScopeItems()
     {
+        return this.WhenAnyValue(
+                x => x.ScopePackChoice.SelectedPack!.SelectedAssets.Count,
+                numSelectedAssetsFromScopePack => numSelectedAssetsFromScopePack > 0);
+    }
+
+    private void DoDeleteSelectedScopeItems()
+    {
+        System.Diagnostics.Debug.WriteLine("Running DoDeleteScope...");
         throw new NotImplementedException();
     }
 }
