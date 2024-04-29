@@ -40,8 +40,8 @@
                 >
                 <Button.Content>
                     <MultiBinding StringFormat="{}{0}x{1}">
-                        <Binding Path="ModPackChoice.SelectedItem.SelectedAssets.Count" />
-                        <Binding Path="ScopePackChoice.SelectedItem.SelectedAssets.Count" />
+                        <Binding Path="ModPackChoice.SelectedPack.SelectedAssets.Count" />
+                        <Binding Path="ScopePackChoice.SelectedPack.SelectedAssets.Count" />
                     </MultiBinding>
                 </Button.Content>
             </Button>

@@ -52,12 +52,12 @@ public class Workspace : ReactiveObject
 
     public void CopySelectedModItemsToScope()
     {
-        if (this.ModPackChoice.SelectedItem == null)
+        if (this.ModPackChoice.SelectedPack == null)
         {
             return;
         }
 
-        var assetsToCopy = this.ModPackChoice.SelectedItem.SelectedAssets;
+        var assetsToCopy = this.ModPackChoice.SelectedPack.SelectedAssets;
 
         this.ScopePackChoice.Overwrite(assetsToCopy);
     }

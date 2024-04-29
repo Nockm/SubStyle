@@ -7,14 +7,14 @@ using SubStyle.Sys;
 
 public class PackChoice : ReactiveObject
 {
-    private Pack? selectedItem;
+    private Pack? selectedPack;
 
     private ObservableCollection<Pack> packs = new ObservableCollection<Pack>();
 
-    public Pack? SelectedItem
+    public Pack? SelectedPack
     {
-        get => this.selectedItem;
-        set => this.RaiseAndSetIfChanged(ref this.selectedItem, value);
+        get => this.selectedPack;
+        set => this.RaiseAndSetIfChanged(ref this.selectedPack, value);
     }
 
     public ObservableCollection<Pack> Items
@@ -24,7 +24,7 @@ public class PackChoice : ReactiveObject
 
     public void CopyFrom(PackChoice packChoice)
     {
-        this.SelectedItem = packChoice.SelectedItem;
+        this.SelectedPack = packChoice.SelectedPack;
         this.Items.SetRange(packChoice.Items);
     }
 

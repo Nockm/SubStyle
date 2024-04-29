@@ -38,7 +38,7 @@ public class WorkspaceDtd : Workspace
                 selectedPack.Assets[5],
                 });
 
-            this.ModPackChoice.SelectedItem = selectedPack;
+            this.ModPackChoice.SelectedPack = selectedPack;
         }
 
         // Dream up scope selection
@@ -58,7 +58,7 @@ public class WorkspaceDtd : Workspace
                 selectedPack.Assets[5],
                 });
 
-            this.ScopePackChoice.SelectedItem = selectedPack;
+            this.ScopePackChoice.SelectedPack = selectedPack;
         }
     }
 }
@@ -70,7 +70,7 @@ public class PackChoiceDtd : PackChoice
         PackChoice packChoice = Dtd.Workspace.ModPackChoice;
 
         this.Items.SetRange(packChoice.Items);
-        this.SelectedItem = packChoice.Items[0];
+        this.SelectedPack = packChoice.Items[0];
     }
 }
 

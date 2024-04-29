@@ -21,7 +21,7 @@
             DockPanel.Dock="Top"
             ItemsSource="{Binding Items}"
             PlaceholderText="{Binding Prompt, ElementName=This}"
-            SelectedItem="{Binding SelectedItem}"
+            SelectedItem="{Binding SelectedPack}"
             >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -41,6 +41,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <views:PackView DataContext="{Binding SelectedItem}" />
+        <views:PackView DataContext="{Binding SelectedPack}" />
     </DockPanel>
 </UserControl>
