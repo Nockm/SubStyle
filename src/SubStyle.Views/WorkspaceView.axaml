@@ -36,7 +36,7 @@
             <Button
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Command="{Binding CopySelectedModItemsToScope}"
+                Command="{Binding ApplyModCommand}"
                 >
                 <Button.Content>
                     <MultiBinding StringFormat="{}{0}x{1}">
@@ -50,7 +50,7 @@
             <Border DockPanel.Dock="Bottom">
                 <Button
                     Classes="m3"
-                    Command="{Binding DeleteSelectedScopeItems}"
+                    Command="{Binding DeleteSelectedScopeItemsCommand}"
                     Content="Delete Selected"
                     />
             </Border>
